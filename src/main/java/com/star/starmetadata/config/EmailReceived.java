@@ -1,5 +1,6 @@
 package com.star.starmetadata.config;
 import org.flowable.engine.*;
+import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.repository.ProcessDefinition;
@@ -14,10 +15,10 @@ import java.util.Scanner;
 public class EmailReceived {
     public static void main(String[] args) {
         ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration()
-                .setJdbcUrl("jdbc:h2:mem:flowable;DB_CLOSE_DELAY=-1")
-                .setJdbcUsername("sa")
-                .setJdbcPassword("")
-                .setJdbcDriver("org.h2.Driver")
+                .setJdbcUrl("jdbc:postgresql://127.0.0.1:5432/STAR_DB")
+                .setJdbcUsername("postgres")
+                .setJdbcPassword("1100")
+                .setJdbcDriver("org.postgresql.Driver")
                 .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
 
         ProcessEngine processEngine = cfg.buildProcessEngine();
@@ -65,9 +66,24 @@ public class EmailReceived {
                 processVariables.get("nrOfHolidays") + " of holidays. Do you approve this?");
 
         boolean approved = scanner.nextLine().toLowerCase().equals("y");
+        System.out.println(approved);
         variables = new HashMap<String, Object>();
         variables.put("approved", approved);
+        System.out.println(variables);
         taskService.complete(task.getId(), variables);
+
+        HistoryService historyService = processEngine.getHistoryService();
+        List<HistoricActivityInstance> activities =
+                historyService.createHistoricActivityInstanceQuery()
+                        .processInstanceId(processInstance.getId())
+                        .finished()
+                        .orderByHistoricActivityInstanceEndTime().asc()
+                        .list();
+
+        for (HistoricActivityInstance activity : activities) {
+            System.out.println(activity.getActivityId() + " took "
+                    + activity.getDurationInMillis() + " milliseconds");
+        }
 
     }
 }
