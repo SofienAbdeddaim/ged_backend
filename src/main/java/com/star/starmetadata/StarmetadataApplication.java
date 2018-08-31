@@ -1,7 +1,4 @@
 package com.star.starmetadata;
-
-import com.star.starmetadata.repositories.MetadataRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,6 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class StarmetadataApplication {
 
     public static void main(String[] args) {
+        System.out.println("********************************************");
+//        ProcessEngine processEngine = cfg.buildProcessEngine();
+        System.out.println("********************************************");
         SpringApplication.run(StarmetadataApplication.class, args);
     }
+
 }
