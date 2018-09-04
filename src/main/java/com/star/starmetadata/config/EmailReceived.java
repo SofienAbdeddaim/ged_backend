@@ -15,25 +15,15 @@ import java.util.Scanner;
 
 public class EmailReceived {
 
-    @Bean
-    public ProcessEngineConfiguration processEngineConfiguration(){
-        return new StandaloneProcessEngineConfiguration()
-                .setJdbcUrl("jdbc:postgresql://127.0.0.1:5432/STAR_DB")
-                .setJdbcUsername("postgres")
-                .setJdbcPassword("1100")
-                .setJdbcDriver("org.postgresql.Driver")
-                .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
-    }
-
 //    public static void main(String[] args) {
 //
-//        ProcessEngine processEngine = cfg.buildProcessEngine();
+//        ProcessEngine processEngine = cfg.buildProcessEngine();------------
 //
 //        RepositoryService repositoryService = processEngine.getRepositoryService();
 //        Deployment deployment = repositoryService.createDeployment()
 //                .addClasspathResource("Email_arriver.bpmn")
 //
-//                .deploy();
+//                .deploy();----------------------------------------------------------------------------*************
 //
 //        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
 //                .deploymentId(deployment.getId())
@@ -51,7 +41,7 @@ public class EmailReceived {
 //
 //        System.out.println("Why do you need them?");
 //        String description = scanner.nextLine();
-//        //        /-----------------------------END
+//        //        /-----------------------------END******************************************************************
 //
 //        RuntimeService runtimeService = processEngine.getRuntimeService();
 //
@@ -72,6 +62,7 @@ public class EmailReceived {
 //        System.out.println("Which task would you like to complete?");
 //        int taskIndex = Integer.valueOf(scanner.nextLine());
 //        Task task = tasks.get(taskIndex - 1);
+
 //        Map<String, Object> processVariables = taskService.getVariables(task.getId());
 //        System.out.println(processVariables.get("employee") + " wants " +
 //                processVariables.get("nrOfHolidays") + " of holidays. Do you approve this? ");
