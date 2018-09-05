@@ -4,7 +4,7 @@
     <startEvent id="startEvent"/>
     <sequenceFlow sourceRef="startEvent" targetRef="approveTask"/>
 
-    <userTask id="approveTask" name="Approve or reject request" flowable:candidateGroups="managers"/>
+    <userTask id="approveTask" name="Approve or reject request" flowable:candidateGroups="manager"/>
 
     <sequenceFlow sourceRef="approveTask" targetRef="decision"/>
 
@@ -28,7 +28,7 @@
                  flowable:class="com.star.starmetadata.config.CallExternalSystemDelegate"/>
     <sequenceFlow sourceRef="confirmEmail" targetRef="emailConfirmed"/>
 
-    <userTask id="emailConfirmed" name="Holiday approved" flowable:assignee="${employee}"/>
+    <userTask id="emailConfirmed" name="Holiday approved" flowable:assignee="${person.firstName}"/>
     <sequenceFlow sourceRef="emailConfirmed" targetRef="approveEnd"/>
 
     <serviceTask id="cancel" name="Send out rejection email"

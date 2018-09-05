@@ -5,10 +5,7 @@ import org.flowable.engine.task.Event;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +18,8 @@ public class WorkflowController {
     private WorkflowService workflowService;
 
     @RequestMapping(value="/process", method= RequestMethod.POST)
-    public void startProcessInstance() {
-        workflowService.startProcess();
+    public void startProcessInstance(@RequestBody StartProcessRepresentation startProcessRepresentation) {
+        workflowService.startProcess(startProcessRepresentation.getAssignee());
     }
 
     @RequestMapping(value="/tasks", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
@@ -33,6 +30,19 @@ public class WorkflowController {
             dtos.add(new TaskRepresentation(task.getId(), task.getName()));
         }
         return dtos;
+    }
+
+    static class StartProcessRepresentation {
+
+        private String assignee;
+
+        public String getAssignee() {
+            return assignee;
+        }
+
+        public void setAssignee(String assignee) {
+            this.assignee = assignee;
+        }
     }
 
     static class TaskRepresentation {

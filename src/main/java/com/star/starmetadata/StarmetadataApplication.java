@@ -13,17 +13,6 @@ import java.util.List;
 @SpringBootApplication
 public class StarmetadataApplication {
 
-//    Configuration of the flowable Engine
-    @Bean
-    public ProcessEngineConfiguration processEngineConfiguration() {
-        return new StandaloneProcessEngineConfiguration()
-                .setJdbcUrl("jdbc:postgresql://127.0.0.1:5432/STAR_DB")
-                .setJdbcUsername("postgres")
-                .setJdbcPassword("1100")
-                .setJdbcDriver("org.postgresql.Driver")
-                .setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
-    }
-
     public static void main(String[] args) {
         System.out.println("********************************************");
 //        ProcessEngine processEngine = cfg.buildProcessEngine();
