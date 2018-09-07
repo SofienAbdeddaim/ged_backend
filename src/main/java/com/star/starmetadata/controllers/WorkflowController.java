@@ -32,6 +32,12 @@ public class WorkflowController {
         return dtos;
     }
 
+    @RequestMapping(value = "/decision", method = RequestMethod.GET)
+    public String taskDecision(@RequestParam Boolean approve, String taskId) {
+       String idTask = workflowService.taskDecision(approve, taskId);
+       return idTask;
+    }
+
     static class StartProcessRepresentation {
 
         private String assignee;

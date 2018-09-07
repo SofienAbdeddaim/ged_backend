@@ -35,7 +35,23 @@ public class WorkflowService {
     }
 
     public List<Task> getTasks(String assignee) {
-        return taskService.createTaskQuery().taskUnassigned().list();
+        List<Task> tasks = taskService.createTaskQuery().list();
+        List<Task> tasks1 = taskService.createTaskQuery().taskAssignee(assignee).list();
+        List<Task> tasks2 = taskService.createTaskQuery().taskCandidateOrAssigned(assignee).list();
+
+
+
+        Long tasks3 = taskService.createTaskQuery().count();
+
+        return taskService.createTaskQuery().taskCandidateGroup(assignee).list();
+    }
+
+    public String taskDecision(Boolean aBoolean, String id) {
+        Map<String, Object> variable = new HashMap<String, Object>();
+        variable.put("approved", true);
+
+        taskService.complete(id, variable, true);
+        return id;
     }
 
 //    that's for add a dummy user just momently

@@ -19,7 +19,7 @@
     <sequenceFlow  sourceRef="decision" targetRef="cancel">
       <conditionExpression xsi:type="tFormalExpression">
         <![CDATA[
-          ${!approved}
+          ${!approve d}
         ]]>
       </conditionExpression>
     </sequenceFlow>
@@ -28,7 +28,7 @@
                  flowable:class="com.star.starmetadata.config.CallExternalSystemDelegate"/>
     <sequenceFlow sourceRef="confirmEmail" targetRef="emailConfirmed"/>
 
-    <userTask id="emailConfirmed" name="Holiday approved" flowable:assignee="${person.firstName}"/>
+    <userTask id="emailConfirmed" name="Holiday approved" flowable:assignee="user"/>
     <sequenceFlow sourceRef="emailConfirmed" targetRef="approveEnd"/>
 
     <serviceTask id="cancel" name="Send out rejection email"
